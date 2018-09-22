@@ -1,4 +1,4 @@
-var _ = require('./src/main');
+var _ = require('./dist');
 
 // var moment = require('moment');
 
@@ -20,16 +20,19 @@ var _ = require('./src/main');
 // console.log(_.toKb(10.5690809809, 4));
 
 
-var map = {
-    name : "id",
-    amount : "total",
-    reported : "updated",
-    // date : "issued"
-};
-var a = {
-    name : "Foo",
-    amount: 55,
-    reported : false,
-    date : "10/01/2001"
-};
-console.log(_.mirror(a, map));
+// var map = {
+//     name : "id",
+//     amount : "total",
+//     reported : "updated",
+//     // date : "issued"
+// };
+// var a = {
+//     name : "Foo",
+//     amount: 55,
+//     reported : false,
+//     date : "10/01/2001"
+// };
+// console.log(_.mirror(a, map));
+
+
+console.log(_.toUnit(50000,'sat', 'BTC'));

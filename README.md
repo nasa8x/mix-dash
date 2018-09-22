@@ -132,3 +132,12 @@ Use with Vue
 ```js
 Vue.use(_);
 ```
+
+Conversion between the bitcoin base unit (BTC) and other units (Satoshi, μBTC, ...)
+```js
+//['BTC', 'mBTC', 'μBTC', 'bit', 'Satoshi', 'sat']
+_.toUnit(5,'BTC', 'sat');
+// 500000000
+_.toUnit(50000,'sat', 'BTC')
+// 0.0005
+```

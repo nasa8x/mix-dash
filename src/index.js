@@ -1,6 +1,17 @@
-var _ = require('lodash');
+var _ = require('lodash'),
+    Big = require('big.js');
+
+var units = {
+    'BTC': new Big(1),
+    'mBTC': new Big(0.001),
+    'μBTC': new Big(0.000001),
+    'bit': new Big(0.000001),
+    'Satoshi': new Big(0.00000001),
+    'sat': new Big(0.00000001)
+};
 
 _.mixin({
+
     isNullOrUndefined: function (s) {
         return s === undefined || s === null;
     },
@@ -152,6 +163,39 @@ _.mixin({
             result[key] = value;
             return result;
         }, {});
+    },
+    toUnit: function (from, fromUnit, toUnit, representation) {
+        let fromFactor = units[fromUnit];
+        if (fromFactor === undefined) {
+            throw new Error(`'${fromUnit}' is not a bitcoin unit`);
+        }
+        let toFactor = units[toUnit];
+        if (toFactor === undefined) {
+            throw new Error(`'${toUnit}' is not a bitcoin unit`);
+        }
+
+        if (Number.isNaN(from)) {
+            if (!representation || representation === 'Number') {
+                return from;
+            } else if (representation === 'Big') {
+                return new Big(from); // throws BigError
+            } else if (representation === 'String') {
+                return from.toString();
+            }
+            throw new Error(`'${representation}' is not a valid representation`);
+        }
+
+        let result = new Big(from).times(fromFactor).div(toFactor);
+
+        if (!representation || representation === 'Number') {
+            return Number(result);
+        } else if (representation === 'Big') {
+            return result;
+        } else if (representation === 'String') {
+            return result.toString();
+        }
+
+        throw new Error(`'${representation}' is not a valid representation`);
     },
     // Vue use
     install: function (Vue) {
