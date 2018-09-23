@@ -137,7 +137,11 @@ Conversion between the bitcoin base unit (BTC) and other units (Satoshi, μBTC, 
 ```js
 //['BTC', 'mBTC', 'μBTC', 'bit', 'Satoshi', 'sat']
 _.toUnit(5,'BTC', 'sat');
+_.toSAT(5);
 // 500000000
-_.toUnit(50000,'sat', 'BTC')
+
+_.toUnit(50000,'sat', 'BTC');
+_.toBTC(50000);
 // 0.0005
+
 ```

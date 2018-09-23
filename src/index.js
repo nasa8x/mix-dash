@@ -197,6 +197,12 @@ _.mixin({
 
         throw new Error(`'${representation}' is not a valid representation`);
     },
+    toBTC: function (val) {
+        return this.toUnit(val, 'sat', 'BTC');
+    },
+    toSAT: function (val) {
+        return this.toUnit(val, 'BTC', 'sat');
+    },
     // Vue use
     install: function (Vue) {
         Vue.prototype._ = this;

@@ -35,4 +35,4 @@ var _ = require('./dist');
 // console.log(_.mirror(a, map));
 
 
-console.log(_.toUnit(50000,'sat', 'BTC'));
+console.log(_.toSAT(0.005));
