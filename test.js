@@ -35,4 +35,4 @@ var _ = require('./dist');
 // console.log(_.mirror(a, map));
 
 
-console.log(_.toSAT(999.95));
+console.log(_.toKb(828377344.75, 'K'));

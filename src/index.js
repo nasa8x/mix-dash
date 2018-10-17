@@ -8,6 +8,11 @@ var units = {
     'bit': new Big(0.000001),
     'Satoshi': new Big(0.00000001),
     'sat': new Big(0.00000001)
+    // 'BTC': [1e8, 8],
+    // 'mBTC': [1e5, 5],
+    // 'uBTC': [1e2, 2],
+    // 'bits': [1e2, 2],
+    // 'satoshis': [1, 0]
 };
 
 _.mixin({
@@ -80,20 +85,22 @@ _.mixin({
         }
     },
 
-    toKb: function (num, padding) {
-        var _suffixes = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
-        var i = 0;
-        var _val = num;
-        while (Math.round(_val / 1000) >= 1) {
-            _val /= 1000;
-            i++;
+    toKb: function (num, suffix, decimal) {
+
+        if (this.isNumber(suffix)) {
+            decimal = suffix;
+            suffix = undefined;
         }
 
-        if (i > 0)
-            return this.format("{0}{1}", this.numberFormat(_val, padding), _suffixes[i]);
-        return this.numberFormat(_val, padding);
+        if (isNaN(num) || num == null) return '';
+        var sizes = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
+        var k = 1000, dm = decimal || 2;
+        var i = suffix ? this.indexOf(sizes, suffix) : Math.floor(Math.log(num) / Math.log(k));
+        //return parseFloat((num / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        return this.numberFormat((num / Math.pow(k, i)), dm) + sizes[i];
 
     },
+    
     toHHMMSS: function (seconds) {
         var _a = new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
         return _a.replace(/^00:/, '');
