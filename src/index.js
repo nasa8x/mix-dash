@@ -1,19 +1,5 @@
-var _ = require('lodash'),
-    Big = require('big.js');
 
-var units = {
-    'BTC': new Big(1),
-    'mBTC': new Big(0.001),
-    'μBTC': new Big(0.000001),
-    'bit': new Big(0.000001),
-    'Satoshi': new Big(0.00000001),
-    'sat': new Big(0.00000001)
-    // 'BTC': [1e8, 8],
-    // 'mBTC': [1e5, 5],
-    // 'uBTC': [1e2, 2],
-    // 'bits': [1e2, 2],
-    // 'satoshis': [1, 0]
-};
+var _ = require('lodash');
 
 _.mixin({
 
@@ -100,7 +86,7 @@ _.mixin({
         return this.numberFormat((num / Math.pow(k, i)), dm) + sizes[i];
 
     },
-    
+
     toHHMMSS: function (seconds) {
         var _a = new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
         return _a.replace(/^00:/, '');
@@ -171,39 +157,36 @@ _.mixin({
             return result;
         }, {});
     },
-    toUnit: function (from, fromUnit, toUnit, representation) {
-        let fromFactor = units[fromUnit];
-        if (fromFactor === undefined) {
-            throw new Error(`'${fromUnit}' is not a bitcoin unit`);
-        }
-        let toFactor = units[toUnit];
-        if (toFactor === undefined) {
-            throw new Error(`'${toUnit}' is not a bitcoin unit`);
-        }
 
-        if (Number.isNaN(from)) {
-            if (!representation || representation === 'Number') {
-                return from;
-            } else if (representation === 'Big') {
-                return new Big(from); // throws BigError
-            } else if (representation === 'String') {
-                return from.toString();
-            }
-            throw new Error(`'${representation}' is not a valid representation`);
+    toUnit: function (amount, from, to) {
+
+        var UNITS = {
+            'BTC': [1e8, 8],
+            'btc': [1e8, 8],
+            'mBTC': [1e5, 5],
+            'uBTC': [1e2, 2],
+            'bits': [1e2, 2],
+            'satoshis': [1, 0],
+            'sat': [1, 0]
+        };
+
+        if (!UNITS[from]) {
+            throw new Error(`'${from}' is not a bitcoin unit`);
         }
 
-        let result = new Big(from).times(fromFactor).div(toFactor);
-
-        if (!representation || representation === 'Number') {
-            return Number(result);
-        } else if (representation === 'Big') {
-            return result;
-        } else if (representation === 'String') {
-            return result.toString();
+        if (!UNITS[to]) {
+            throw new Error(`'${to}' is not a bitcoin unit`);
         }
 
-        throw new Error(`'${representation}' is not a valid representation`);
+        if (Number.isNaN(amount)) {
+            throw new Error(`'${amount}' is not a valid exchange`);
+        }
+
+        var val = parseInt((amount * UNITS[from][0]).toFixed());
+        var result = val / UNITS[to][0];
+        return parseFloat(result.toFixed(UNITS[to][1]));
     },
+
     toBTC: function (val) {
         return this.toUnit(val, 'sat', 'BTC');
     },

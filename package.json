@@ -1,6 +1,6 @@
 {
   "name": "mix-dash",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "main": "dist/index.js",
   "description": "Generic utility functions (Mixin Lodash)",
   "author": {
@@ -17,7 +17,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "big.js": "^5.2.1",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
