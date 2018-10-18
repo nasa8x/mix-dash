@@ -105,9 +105,10 @@ _.mixin({
 
         if (isNaN(number) || number == null) return '';
 
-        number = parseFloat(number).toFixed(~~padding);
+        if (padding)
+            number = parseFloat(number).toFixed(~~padding);
 
-        var parts = number.split('.'),
+        var parts = number.toString().split('.'),
             fnums = parts[0],
             decimals = parts[1] ? '.' + parts[1] : '';
 

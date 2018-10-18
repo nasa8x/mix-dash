@@ -35,6 +35,6 @@ var _ = require('./dist');
 // console.log(_.mirror(a, map));
 
 
-console.log(_.toUnit(1,'abc','btc'));
 
-console.log(_.toBTC('Z'));
+
+console.log(_.numberFormat(10000.88));
