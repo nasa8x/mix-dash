@@ -37,4 +37,4 @@ var _ = require('./dist');
 
 
 
-console.log(_.numberFormat(10000.88));
+console.log(_.toNanoId('ad5d7e24c912ecf1232b62df099c93ef6a9621d5558259f8f3b2e63a2dbbd04a'));

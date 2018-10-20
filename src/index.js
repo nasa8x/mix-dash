@@ -194,6 +194,51 @@ _.mixin({
     toSAT: function (val) {
         return this.toUnit(val, 'BTC', 'sat');
     },
+
+    hashCode: function (str) {
+        var hash = 0;
+        if (str.length == 0) return hash;
+        for (var i = 0; i < str.length; i++) {
+            var ch = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + ch;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    },
+
+    toNanoId: function (str) {
+
+        var integer = this.hashCode(str);
+        var binary = 62;
+        var stack = [];
+        var num;
+        var result = '';
+        var sign = integer < 0 ? '-' : '';
+        var t = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        integer = Math.abs(integer);
+
+        while (integer >= binary) {
+            num = integer % binary;
+            integer = Math.floor(integer / binary);
+            stack.push(t[num]);
+        }
+
+        if (integer > 0) {
+            stack.push(t[integer]);
+        }
+
+        for (var i = stack.length - 1; i >= 0; i--) {
+            result += stack[i];
+        }
+
+        return (sign + result).replace('-', 'Z');
+    },
+
+    toShortId: function (str) {
+        return this.toNanoId(str);
+    },
+
     // Vue use
     install: function (Vue) {
         Vue.prototype._ = this;

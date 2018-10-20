@@ -1,6 +1,6 @@
 {
   "name": "mix-dash",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "main": "dist/index.js",
   "description": "Generic utility functions (Mixin Lodash)",
   "author": {
