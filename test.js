@@ -35,6 +35,6 @@ var _ = require('./dist');
 // console.log(_.mirror(a, map));
 
 
-var data = undefined;
 
-console.log( _.sumBy(data, 'val'));
+
+console.log( _.absoluteUrl('http://learnstartup.net/p/HklB5Zplm/matlab-programming-mxc', '/www/css/app.css?0d224a10c7f675849439'));

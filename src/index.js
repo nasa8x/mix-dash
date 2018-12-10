@@ -136,17 +136,24 @@ _.mixin({
             relative.match(/^(http:)|^(https:)|^(\/\/)|^(#)|^(javascript:)|^(mailto:)|^(ftp:)|^(file:)|^(data:)/ig))
             return relative;
 
-        var stack = base.split("/"),
-            parts = relative.split("/");
-        stack.pop(); // remove current file name (or empty string)
-        // (omit if "base" is the current folder without trailing slash)
-        for (var i = 0; i < parts.length; i++) {
-            if (parts[i] == ".")
+        var stack = base.split('/'),
+            url = relative.split('/');
+        if (url[0] == '') {
+            var matches = base.match(/^(https?:)?\/\/[^/]+/i);
+            var domain = matches && matches[0];
+            stack = [domain];
+        }
+        else{
+            stack.pop(); 
+        }     
+
+        for (var i = 0; i < url.length; i++) {
+            if (url[i] == "." || url[i] == '')
                 continue;
-            if (parts[i] == "..")
+            if (url[i] == "..")
                 stack.pop();
             else
-                stack.push(parts[i]);
+                stack.push(url[i]);
         }
         return stack.join("/");
     },
