@@ -206,7 +206,7 @@ _.mixin({
         return hash;
     },
 
-    toNanoId: function (str) {
+    nano: function (str) {
 
         var integer = this.hashCode(str);
         var binary = 62;
@@ -235,8 +235,8 @@ _.mixin({
         return (sign + result).replace('-', 'Z');
     },
 
-    toShortId: function (str) {
-        return this.toNanoId(str);
+    tiny: function (str) {
+        return this.nano(str);
     },
 
     // Vue use

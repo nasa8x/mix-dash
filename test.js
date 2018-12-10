@@ -35,6 +35,6 @@ var _ = require('./dist');
 // console.log(_.mirror(a, map));
 
 
+var data = undefined;
 
-
-console.log(_.toNanoId('ad5d7e24c912ecf1232b62df099c93ef6a9621d5558259f8f3b2e63a2dbbd04a'));
+console.log( _.sumBy(data, 'val'));
