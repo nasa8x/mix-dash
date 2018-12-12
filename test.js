@@ -37,4 +37,7 @@ var _ = require('./dist');
 
 
 
-console.log( _.absoluteUrl('http://learnstartup.net/p/HklB5Zplm/matlab-programming-mxc', '/www/css/app.css?0d224a10c7f675849439'));
+console.log( _.now());
+1544585468
+1544585780
+// 1544585437156

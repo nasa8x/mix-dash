@@ -143,9 +143,9 @@ _.mixin({
             var domain = matches && matches[0];
             stack = [domain];
         }
-        else{
-            stack.pop(); 
-        }     
+        else {
+            stack.pop();
+        }
 
         for (var i = 0; i < url.length; i++) {
             if (url[i] == "." || url[i] == '')
@@ -244,6 +244,10 @@ _.mixin({
 
     tiny: function (str) {
         return this.nano(str);
+    },
+
+    now: function () {
+        return Math.floor(new Date().getTime() / 1000);
     },
 
     // Vue use
