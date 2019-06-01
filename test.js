@@ -37,7 +37,6 @@ var _ = require('./dist');
 
 
 
-console.log( _.now());
-1544585468
-1544585780
+console.log( _.toBTC(0));
+
 // 1544585437156
