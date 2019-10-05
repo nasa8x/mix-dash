@@ -17,7 +17,7 @@ _.mixin({
     },
 
     isUrl: function (s) {
-        return this.isEmpty(s) ? false : s.match(/((http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/gi);
+        return this.isEmpty(s) ? false : /((http(s)?):\/\/[\w\.\/\-=?#]+)/i.test(s);
     },
     isLink: function (s) {
         return this.isUrl(s);
@@ -81,6 +81,9 @@ _.mixin({
         if (isNaN(num) || num == null) return '';
         var sizes = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
         var k = 1000, dm = decimal || 2;
+
+        if (num < k) return num;
+
         var i = suffix ? this.indexOf(sizes, suffix) : Math.floor(Math.log(num) / Math.log(k));
         //return parseFloat((num / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         return this.numberFormat((num / Math.pow(k, i)), dm) + sizes[i];
@@ -157,6 +160,46 @@ _.mixin({
         }
         return stack.join("/");
     },
+
+    getHostName: function (url) {
+        var match = url.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i);
+        if (match != null && match.length > 2 && typeof match[2] === 'string' && match[2].length > 0) {
+            return match[2];
+        } else {
+            return null;
+        }
+    },
+
+
+    // insiteLink: function (html, baseURL) {
+    //     str = str.replace(/href="(.*?)"/g, (m, $1) => 'href="' + baseURL + encodeURIComponent($1) + '"');
+    // },
+
+    nofollow: function (html, whiteList) {
+        var whiteList = whiteList || ['([^/]+\.)?morioh.com'];
+        var str = '(<a\s*(?!.*\brel=)[^>]*)(href="https?://)((?!(?:' + whiteList.join('|') + '))[^"]+)"((?!.*\brel=)[^>]*)(?:[^>]*)>';
+
+        return html.replace(new RegExp(str, 'igm'), '$1$2$3"$4 rel="nofollow">');
+    },
+
+    // const ObjectId = (m = Math, d = Date, h = 16, s = s => m.floor(s).toString(h)) =>     s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h))
+    // objectID: function (m = Math, d = Date, h = 16, s = s => m.floor(s).toString(h)) {
+
+    //     s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h))
+    // },
+
+    getHashTags: function (inputText) {
+        var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        var matches = [];
+        var match;
+
+        while ((match = regex.exec(inputText))) {
+            matches.push(match[1]);
+        }
+
+        return matches;
+    },
+
 
     mirror: function (obj, map) {
         return this.reduce(obj, function (result, value, key) {

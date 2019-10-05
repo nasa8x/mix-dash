@@ -37,6 +37,15 @@ var _ = require('./dist');
 
 
 
-console.log( _.toBTC(0));
+// console.log( _.toBTC(0));
 
 // 1544585437156
+
+// var str = "<a href=\"http://example.com/more?stuff goes here\">more</a>";
+// str = str.replace(/href=\"(.+?)\"/g, function (match, p1) {
+//     return "https://l.morioh.com/abc?r="+ encodeURI(p1);
+// });
+
+ 
+
+console.log(_.getHostName('https://morioh.com/abc/def'));
