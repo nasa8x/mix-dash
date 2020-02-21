@@ -48,4 +48,4 @@ var _ = require('./dist');
 
  
 
-console.log(_.getHostName('https://morioh.com/abc/def'));
+console.log(_.isCrawl('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Flipboard/4.2.59'));
