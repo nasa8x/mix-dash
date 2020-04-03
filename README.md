@@ -1,5 +1,9 @@
 Generic utility functions (Mixin Lodash)
 
+☞ [Javascript Tutorial for Absolute Beginners](https://morioh.com/list/5dcd0341203e265d661aa028)
+
+☞ [Modern JavaScript [ ES6, ES7, ES8 ] Crash Course](https://morioh.com/p/f146ca613761)
+
 # Installation
 
 ```js
@@ -28,11 +32,11 @@ _.isUrl('http://google.com'); // return true
 ```
 
 ```js
-_.isEmpty(''); // return true
-_.isEmpty('  '); // return true
-_.isEmpty(null); // return true
-_.isEmpty('&nbsp;'); // return true
-_.isEmpty('Hello'); // return false
+_.isNullOrWhiteSpace(''); // return true
+_.isNullOrWhiteSpace('  '); // return true
+_.isNullOrWhiteSpace(null); // return true
+_.isNullOrWhiteSpace('&nbsp;'); // return true
+_.isNullOrWhiteSpace('Hello'); // return false
 ```
 
 ```js

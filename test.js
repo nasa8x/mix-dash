@@ -40,6 +40,7 @@ var _ = require('./dist');
 // console.log( _.toBTC(0));
 
 // 1544585437156
+// 1585886628889
 
 // var str = "<a href=\"http://example.com/more?stuff goes here\">more</a>";
 // str = str.replace(/href=\"(.+?)\"/g, function (match, p1) {
@@ -48,4 +49,7 @@ var _ = require('./dist');
 
  
 
-console.log(_.isCrawl('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Flipboard/4.2.59'));
+// console.log(_.isCrawl('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Flipboard/4.2.59'));
+
+
+console.log(_.now())
