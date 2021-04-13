@@ -1,50 +1,32 @@
 {
-  "name": "mix-dash",
-  "version": "1.1.17",
-  "main": "dist/index.js",
+  "name": "@morioh/dash",
+  "version": "1.0.3",
+  "main": "dist/_.js",
   "description": "Generic utility functions (Mixin Lodash)",
-  "author": {
-    "name": "Nasa8x"
-  },
+  "author": "Morioh Team",
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/nasa8x/mix-dash"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --progress --watch --colors",
-    "prod": "cross-env NODE_ENV=production webpack -p --progress --colors",
+    "dev": "cross-env NODE_ENV=development webpack --progress --watch",
+    "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
     "test": "node ./test.js"
   },
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21",
+    "underscore.string": "^3.3.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "babel-loader": "^8.1.0",
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
-    "cross-env": "^7.0.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "webpack-node-externals": "^1.6.0"
+    "cross-env": "^7.0.3",
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-node-externals": "^2.5.2"
   },
-  "keywords": [
-    "utils",
-    "util",
-    "random",
-    "md5",
-    "sha256",
-    "hash",
-    "crawl",
-    "random datetime",
-    "isEmpty",
-    "isNullOrWhiteSpace",
-    "isNullOrUndefined",
-    "toKb",
-    "toHHMMSS",
-    "parseLinks",
-    "slug",
-    "slugify"
-  ]
+  "keywords": []
 }

@@ -9,21 +9,21 @@ module.exports = function (env) {
         ///----------------------------
         {
 
-            mode: 'development',
+            // mode: 'development',
             target: 'node',
-            devtool: '#source-map',
+            devtool: 'source-map',
             node: {
                 __dirname: true,
                 __filename: true,
             },
             entry: {
 
-                'index': './src/index.js',
+                '_': './src/index.js',
                
 
             },
             output: {
-                libraryTarget: 'commonjs2',
+                libraryTarget: 'umd',
                 path: path.join(__dirname, './dist'),
                 filename: '[name].js',
 
@@ -37,19 +37,21 @@ module.exports = function (env) {
                         loader: 'babel-loader',
                         //exclude: /node_modules/
                     },
-                    {
-                        test: /\.html$/,
-                        loader: 'html-loader',
-                        query: {
-                            minimize: false
-                        }
-                    },
+                    // {
+                    //     test: /\.html$/,
+                    //     loader: 'html-loader',
+                    //     query: {
+                    //         minimize: false
+                    //     }
+                    // },
 
 
                 ]
             },
             //externals: [/^(?!\.|\/).+/i,],
-            externals: [nodeExternals()],
+            externals: [nodeExternals({
+                allowlist: [/^underscore/]
+            })],
             plugins: [
                 new webpack.DefinePlugin({
                     'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development") }
